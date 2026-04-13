@@ -1,0 +1,31 @@
+# Maven 编译输出目录（最重要）
+target/
+
+# Maven 包装器
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE 配置文件（按需取消注释）
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# 操作系统生成的文件
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+
+# 本地环境配置
+*.env
+application-local.properties
