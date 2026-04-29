@@ -14,13 +14,13 @@ public class Singleton_00 {
     // 2. 私有化构造器，里面模拟“耗时且占用资源”的操作
     private Singleton_00() {
         System.out.println(">>> 构造器被调用！Singleton_00实例正在被创建...");
-        System.out.println(">>> 正在加载 50MB 配置文件...");
-        System.out.println(">>> 正在建立数据库连接...\n");
+//        System.out.println(">>> 正在加载 50MB 配置文件...");
+//        System.out.println(">>> 正在建立数据库连接...\n");
     }
 
     // 3. 提供全局访问点
     public static Singleton_00 getInstance() {
-        System.out.println("--- getInstance() 方法被调用 ---");
+//        System.out.println("--- getInstance() 方法被调用 ---");
         return INSTANCE;
     }
 
