@@ -1,0 +1,21 @@
+[
+  {
+    "intent": "execute",
+    "actions": [
+      {"actionName": "Click", "target": "ButtonA"},
+      {"actionName": "Input", "target": "SearchBox"}
+    ],
+    "confidenceScores": {
+      "execution_rate": 0.95
+    }
+  },
+  {
+    "intent": "summarize",
+    "actions": [
+      {"actionName": "Scroll", "target": "PageBottom"}
+    ],
+    "confidenceScores": {
+      "summary_rate": 0.88
+    }
+  }
+]
