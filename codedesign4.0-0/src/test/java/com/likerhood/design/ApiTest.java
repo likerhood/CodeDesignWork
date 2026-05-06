@@ -1,5 +1,10 @@
 package com.likerhood.design;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Constructor;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
@@ -266,6 +271,64 @@ public class ApiTest {
             System.out.println("✅ 测试通过！完美的单例，既实现了懒加载，又保证了绝对的并发安全。");
         }
     }
+    public static void test_singleton_05() throws InterruptedException {
+        System.out.println("========== 维纳斯系统防御测试：枚举单例的终极考验 ==========\n");
+
+        Singleton_05 originalInstance = Singleton_05.INSTANCE;
+        originalInstance.doDiagnosticHistorySync("P-001"); // 初始状态，同步数 = 1
+
+        // ================= 攻击一：反射暴力破解 =================
+        System.out.println("\n[攻击一] 黑客尝试使用反射机制暴力破解单例...");
+        try {
+            // 枚举的底层其实有一个 (String name, int ordinal) 的隐式构造器
+            Constructor<Singleton_05> constructor =
+                    Singleton_05.class.getDeclaredConstructor(String.class, int.class);
+
+            // 强行关闭安全检查！
+            constructor.setAccessible(true);
+
+            // 尝试强行 new 一个新的枚举实例
+            System.out.println("准备执行 constructor.newInstance()...");
+            Singleton_05 evilInstance = constructor.newInstance("EVIL_INSTANCE", 1);
+
+        } catch (Exception e) {
+            System.err.println("🛡️ 攻击失败！底层 JVM 拦截了反射创建枚举的请求！");
+            System.err.println("拦截原因: " + e.getCause());
+        }
+
+        // ================= 攻击二：序列化克隆破坏 =================
+        System.out.println("\n[攻击二] 黑客尝试使用序列化与反序列化来克隆单例对象...");
+        Singleton_05 clonedInstance = null;
+        try {
+            // 1. 将原实例写入内存数组（模拟写入磁盘/网络传输）
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(originalInstance);
+            oos.close();
+
+            // 2. 从内存数组中重新读取出来（模拟反序列化）
+            ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bis);
+            clonedInstance = (Singleton_05) ois.readObject();
+            ois.close();
+
+            System.out.println("克隆完成！正在比对克隆对象与原对象...");
+
+            // 3. 验证两个对象是否是同一个内存地址
+            if (originalInstance == clonedInstance) {
+                System.out.println("🛡️ 攻击失败！反序列化出来的依然是原本内存中的那个实例！");
+            } else {
+                System.err.println("❌ 灾难爆发！单例被克隆破坏了！");
+            }
+
+            // 4. 验证状态是否一致
+            System.out.println("原对象同步总数: " + originalInstance.getSyncCount());
+            System.out.println("反序列化对象的同步总数: " + clonedInstance.getSyncCount());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
@@ -276,7 +339,8 @@ public class ApiTest {
 
 //        test_singleton_02();
 //        test_singleton_03();
-        test_singleton_04();
+//        test_singleton_04();
+        test_singleton_05();
 
     }
 
