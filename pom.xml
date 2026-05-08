@@ -37,6 +37,8 @@
         <module>codedesign5.0-1</module>
         <module>codedesign5.0-2</module>
         <module>codedesign5.1-0</module>
+        <module>codedesign5.1-1</module>
+        <module>codedesign5.1-2</module>
     </modules>
 
     <dependencyManagement>
@@ -53,6 +55,8 @@
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
+
+
 
         </dependencies>
     </dependencyManagement>
