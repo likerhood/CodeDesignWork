@@ -39,6 +39,8 @@
         <module>codedesign5.1-0</module>
         <module>codedesign5.1-1</module>
         <module>codedesign5.1-2</module>
+        <module>codedesign6.0-0</module>
+        <module>codedesign6.0-1</module>
     </modules>
 
     <dependencyManagement>
