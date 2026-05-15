@@ -29,11 +29,11 @@ public abstract class EngineBase extends EngineConfig implements IEngine {
         TreeNode treeNodeInfo = treeNodeMap.get(rootNodeId);
         // 节点类型[NodeType]: 1.子叶，2.果实
         while(treeNodeInfo.getNodeType().equals(1)){
-            String ruleKey = treeNodeInfo.getRuleKey();
-            LogicFilter logicFilter = logicFilterMap.get(ruleKey);
-            String matterValue = logicFilter.matterValue(treeId, userId, decisionMatter);
-            Long nextNode = logicFilter.filter(matterValue, treeNodeInfo.getTreeNodeLinkList());
-            treeNodeInfo = treeNodeMap.get(nextNode);
+            String ruleKey = treeNodeInfo.getRuleKey();     // 1. 取出判断节点的规则，比如userAge和userGender
+            LogicFilter logicFilter = logicFilterMap.get(ruleKey);  //2. 根据规则获取对应的逻辑过滤器
+            String matterValue = logicFilter.matterValue(treeId, userId, decisionMatter);   //3. 根据过滤器获取对应的决策值，比如用户的userAge=18，userGender
+            Long nextNode = logicFilter.filter(matterValue, treeNodeInfo.getTreeNodeLinkList());    //4. 根据决策值过滤出对应的下一个树节点ID，比如userAge=18，userGender=男，对应的树节点ID=100002
+            treeNodeInfo = treeNodeMap.get(nextNode);       // 5. 获取下一个树节点的信息，继续循环判断，直到找到果实节点
             logger.info("决策树引擎=>{} userId：{} treeId：{} treeNode：{} ruleKey：{} matterValue：{}", treeRoot.getTreeName(), userId, treeId, treeNodeInfo.getTreeNodeId(), ruleKey, matterValue);
         }
         return treeNodeInfo;
