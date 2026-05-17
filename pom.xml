@@ -44,6 +44,8 @@
         <module>codedesign7.0-0</module>
         <module>codedesign7.0-1</module>
         <module>codedesign8.0-0</module>
+        <module>codedesign8.0-1</module>
+        <module>codedesign8.0-2</module>
     </modules>
 
     <dependencyManagement>
