@@ -49,6 +49,7 @@
         <module>codedesign9.0-0</module>
         <module>codedesign10.0-0</module>
         <module>codedesign10.0-1</module>
+        <module>codedesign11.0-0</module>
     </modules>
 
     <dependencyManagement>
