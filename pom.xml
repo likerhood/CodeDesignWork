@@ -50,6 +50,8 @@
         <module>codedesign10.0-0</module>
         <module>codedesign10.0-1</module>
         <module>codedesign11.0-0</module>
+        <module>codedesign12.0-0</module>
+        <module>codedesign12.0-1</module>
     </modules>
 
     <dependencyManagement>
