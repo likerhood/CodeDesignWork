@@ -10,7 +10,7 @@ public abstract class AuthLink {
 
     protected Logger logger = LoggerFactory.getLogger(AuthLink.class);
 
-    protected SimpleDateFormat p = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    protected SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     protected String levelUserId;
     protected String levelUserName;
     protected AuthLink next;
@@ -26,7 +26,7 @@ public abstract class AuthLink {
         return next;
     }
 
-    public AuthLink appendnext(AuthLink next){
+    public AuthLink appendNext(AuthLink next){
         this.next = next;
         return this;
     }
